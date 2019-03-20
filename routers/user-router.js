@@ -60,14 +60,11 @@ router.post("/", upperCase, async (req, res) => {
 });
 
 router.put("/:id", upperCase, async (req, res) => {
-  console.log("Put active");
   try {
     console.log("Try");
     const newUser = await userDb.update(req.params.id, req.body);
-    console.log("newUser: ", newUser);
     if (newUser === 1) {
       const updatedUser = await userDb.getById(req.params.id);
-      console.log("updatedUser: ", updatedUser);
       res.status(200).json(updatedUser);
     } else {
       res.status(404).json({ error: "404 error: User not found" });
